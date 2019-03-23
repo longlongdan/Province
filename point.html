@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>点数据展示</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">  
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/my.css">
+</head>
+<body>
+    <div id="allMap">
+        <div id="map"></div>
+        <div id="line">折线图</div>
+        <div id="react">扇形图</div>
+    </div>
+    <div id="province"></div>
+    <div id="wordCloud"></div>
+    <div id="back" class="glyphicon glyphicon-arrow-left"></div>
+</body>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    <!-- 加载百度地图api -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yNG6YnLLY3g0i9fYlpt6Xg5BESGqe5tr"></script>
+<script type="text/javascript" src="./js/lib/Mapv.js"></script>
+
+<!-- 加载点聚合cdn -->
+<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<!-- 加载echarts -->
+<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<!-- 加载词云 -->
+<script type="text/javascript" src="./js/lib/echarts-wordcloud.min.js"></script>
+<!-- 绘制地图 -->
+<!-- <script type="text/javascript" src="./js/lib/example2.js"></script> -->
+<script type="text/javascript" src="./js/lib/example1.js"></script>
+<script type="text/javascript" src="./js/lib/example.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript" src='./js/jisuan.js'></script>
+<!-- wordCloud展示词云 -->
+<script type="text/javascript" src="./js/wordCloud.js"></script>
+<!-- 展示具体城市信息 -->
+<script type="text/javascript" src="./js/cityDetail.js"></script>
+<!-- province块展示省级数据 -->
+<script type="text/javascript" src="./js/province.js"></script>
+<!-- map块展示中国数据 -->
+<!-- <script type="text/javascript" src="./js/line.js"></script>
+<script type="text/javascript" src="./js/react.js"></script> -->
+<script type="text/javascript" src='./js/map.js'></script>
+<!-- index.js -->
+<script type="text/javascript" src = './js/index.js'></script>
+</html>
