@@ -73,94 +73,120 @@ function getCityDetail(callback) {
 		callback(tt);
 	})
 }
-(function getCityInfo() {
-	var geoc = new BMap.Geocoder(); 
-		var point = new BMap.Point(104.678069, 31.473335);
-		// t = [];
-		geoc.getLocation(point, function (rs) {
-			console.log(rs);
-        var addComp = rs.addressComponents.district;
-			// if(t.indexOf(addComp)===-1) t.push(addComp);
-        });
-
+function getCityInfo(callback) {
 	//获取城市的具体信息，按行业分类
 	d3.csv("./static/mianyang.csv",function(error,csvdata) {
 		csvdata.forEach((item, index) => {
-			//存一下在绵阳的哪个区
-			let reglocation = item.reglocation;
-			if(reglocation.indexOf("高新区") !== -1) {
-				item.district = "高新区"
-			}
-			else if(reglocation.indexOf("游仙") !== -1) {
-				item.district = "游仙区"
-			}
-			else if(reglocation.indexOf("涪城区") !== -1) {
-				item.district = "涪城区"
-			}
-			else if(reglocation.indexOf("科创") !== -1 || reglocation.indexOf("科教创业园区") !== -1) {
-				item.district = "科创园区"
-			}
-			else if(reglocation.indexOf("经开区") !== -1 || reglocation.indexOf("经济技术开发区") !== -1 || reglocation.indexOf("经济开发区") !== -1) {
-				item.district = "经开区"
-			}
-			else if(reglocation.indexOf("安州") !== -1) {
-				item.district = "安州区"
-			}
-			else if(reglocation.indexOf("平武") !== -1) {
-				item.district = "平武区"
-			}
-			else if(reglocation.indexOf("北川羌族自治县") !== -1) {
-				item.district = "北川羌族自治县"
-			}
-			else if(reglocation.indexOf("安县") !== -1) {
-				item.district = "安县"
-			}
-			else if(reglocation.indexOf("三台县") !== -1) {
-				item.district = "三台县"
-			}
-			else if(reglocation.indexOf("江油") !== -1) {
-				item.district = "江油市"
-			}
-			else {
-				console.log(reglocation);
-			}
-			console.log(reglocation);
-			let industry = item.industry;
-			console.log(item.approvedtime  );
-			if(industry.indexOf("制造业") !== -1) {
-				cityInfo.manufacture.push(item);
-			}
-			else if(industry.indexOf("服务") !== -1) {
-				cityInfo.service.push(item);
-			}
-			else if(industry.indexOf("研究") !== -1) {
-				cityInfo.science.push(item);
-			}
-			else if(industry.indexOf("纺织业") !== -1) {
-				cityInfo.spin.push(item);
-			}
-			else if(industry.indexOf("批发业") !== -1) {
-				cityInfo.wholesale.push(item);
-			}
-			else if(industry.indexOf("制品业") !== -1) {
-				cityInfo.products.push(item);
-			}
-			else if(industry.indexOf("加工业") !== -1) {
-				cityInfo.machining.push(item);
-			}
-			else if(industry.indexOf("安装") !== -1) {
-				cityInfo.install.push(item);
-			}
-			else if(industry.indexOf("治理") !== -1) {
-				cityInfo.government.push(item);
-			}
-			else if(industry.indexOf("建筑") !== -1) {
-				cityInfo.architecturea.push(item);
-			}
-			else {
-				cityInfo.other.push(item);
-			}
+			//分区
+			cityInfoHandle.handleReglocation(item);
+			//分类别&&存放
+			cityInfoHandle.handleIndustry(item);
+			//对时间做处理
+			cityInfoHandle.handleTime(item, "approvedtime");
+			cityInfoHandle.handleTime(item, "estiblishtime");
+			cityInfoHandle.handleTime(item, "totime");
+			cityInfoHandle.handleTime(item, "updatetimes");
 		})
+		callback();
 	})
-})()
+}
+var cityInfoHandle = {
+	handleReglocation: function(item) {
+		//存一下在绵阳的哪个区
+		let reglocation = item.reglocation;
+		if(reglocation.indexOf("高新区") !== -1) {
+			item.district = "高新区"
+		}
+		else if(reglocation.indexOf("游仙") !== -1) {
+			item.district = "游仙区"
+		}
+		else if(reglocation.indexOf("涪城区") !== -1) {
+			item.district = "涪城区"
+		}
+		else if(reglocation.indexOf("科创") !== -1 || reglocation.indexOf("科教创业园区") !== -1) {
+			item.district = "科创园区"
+		}
+		else if(reglocation.indexOf("经开区") !== -1 || reglocation.indexOf("经济技术开发区") !== -1 || reglocation.indexOf("经济开发区") !== -1) {
+			item.district = "经开区"
+		}
+		else if(reglocation.indexOf("安州") !== -1) {
+			item.district = "安州区"
+		}
+		else if(reglocation.indexOf("平武") !== -1) {
+			item.district = "平武区"
+		}
+		else if(reglocation.indexOf("农科") !== -1) {
+			item.district = "农科区"
+		}
+		else if(reglocation.indexOf("北川羌族自治县") !== -1) {
+			item.district = "北川羌族自治县"
+		}
+		else if(reglocation.indexOf("安县") !== -1) {
+			item.district = "安县"
+		}
+		else if(reglocation.indexOf("三台县") !== -1) {
+			item.district = "三台县"
+		}
+		else if(reglocation.indexOf("梓潼县") !== -1) {
+			item.district = "梓潼县"
+		}
+		else if(reglocation.indexOf("江油") !== -1) {
+			item.district = "江油市"
+		}
+		else {
+			//不存在这些关键字，通过经纬度坐标去查找
+			var geoc = new BMap.Geocoder(); 
+			var point = new BMap.Point(item.lng,item.lat);
+			geoc.getLocation(point, function (rs) {
+				item.district = rs.addressComponents.district;
+	        });
+		}
+	},
+	handleIndustry: function(item) {
+		//分一下行业类别
+		let industry = item.industry;
+		if(industry.indexOf("制造业") !== -1) {
+			cityInfo.manufacture.push(item);
+		}
+		else if(industry.indexOf("服务") !== -1) {
+			cityInfo.service.push(item);
+		}
+		else if(industry.indexOf("研究") !== -1) {
+			cityInfo.science.push(item);
+		}
+		else if(industry.indexOf("纺织业") !== -1) {
+			cityInfo.spin.push(item);
+		}
+		else if(industry.indexOf("批发业") !== -1) {
+			cityInfo.wholesale.push(item);
+		}
+		else if(industry.indexOf("制品业") !== -1) {
+			cityInfo.products.push(item);
+		}
+		else if(industry.indexOf("加工业") !== -1) {
+			cityInfo.machining.push(item);
+		}
+		else if(industry.indexOf("安装") !== -1) {
+			cityInfo.install.push(item);
+		}
+		else if(industry.indexOf("治理") !== -1) {
+			cityInfo.government.push(item);
+		}
+		else if(industry.indexOf("建筑") !== -1) {
+			cityInfo.architecturea.push(item);
+		}
+		else {
+			cityInfo.other.push(item);
+		}
+	},
+	handleTime: function(item, type) {
+		var time = item[type];
+		if(time.indexOf("E") !== -1) {
+			time = time.replace("E","e");
+			time = Number(time);
+			time = new Date(time);
+			item[type]= time.getFullYear() + "" + (time.getMonth() < 10?"0":"") + time.getMonth() + "" + (time.getDate() < 10?"0":"") + time.getDate();
+		}
+	}
+}
 

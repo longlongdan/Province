@@ -137,7 +137,7 @@ function showProvinceData(citys = null) {
             });
         //显示城市的具体信息
         $("#map").hide();
-        $("#cityDetailFliter").show();
+        $("#wordCloud").hide();
         $("#Citydetail").show();
         map1 = null;
     };

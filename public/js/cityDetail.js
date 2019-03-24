@@ -202,5 +202,69 @@ getCityDetail((data)=>{
        console.log(param);
    })
 });
-    // 获取点击事件 切换城市关键字
-// }
+getCityInfo(() => {
+    var myChart = echarts.init(document.getElementById('establichTime'));
+    var base = +new Date(1968, 9, 3);
+    var oneDay = 24 * 3600 * 1000;
+    var date = [];//从小到大放入所有日期
+
+    var data = [];
+
+    console.log(cityInfo);
+    for(var key in cityInfo) {
+        for(var item_info of cityInfo[key]) {
+            date.push(item_info.estiblishtime, item_info.updatetimes)
+        }
+    }
+    //去重
+    date = Array.from(new Set(date))
+    //从小到大排序
+    date.sort();
+    option = {
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: date,
+            show: false
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%'],
+            show: false
+        },
+        dataZoom: [{
+            type: 'inside',
+            start: 0,
+            end: 100
+        }, {
+            start: 0,
+            end: 100,
+            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+            handleSize: '80%',
+            textStyle: {
+                color: "#fff"
+            },
+            fillerColor: "#337AB7",
+            realtime: false
+        }],
+        series: [
+            {
+                // name:'模拟数据',
+                type:'line',
+                smooth:false,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: "#000C4D",
+                },
+                data: data
+            }
+        ]
+    };
+
+    myChart.setOption(option); 
+    myChart.on("datazoom", function (param) {
+        console.log(date[myChart.getModel().option.dataZoom[0].startValue]); //成立时间
+        console.log(date[myChart.getModel().option.dataZoom[0].endValue]);  //最后更新时间
+    })
+})

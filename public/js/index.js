@@ -10,6 +10,7 @@ $().ready(function(){
   // $("#map").hide();
   $("#back").click(function(e){
    $("#map").show();
+   $("#wordCloud").show();
    if (!map1&&!bmap) {
     map1 = true;
     bmap = null;
