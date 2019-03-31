@@ -2,6 +2,9 @@ body, html,#allMap {width: 100%;height: 100%;overflow: hidden;margin:0;font-fami
 html,body {
 	height: 100%;
 }
+::-webkit-scrollbar{
+	display:none;
+}
 #allMap {
 	float: left;
 	width: 100%;
@@ -27,7 +30,7 @@ html,body {
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: #000c4d;
+	background-color: #081633;
 	width: 35%;
 	height: 40%;
 	border: 1px solid #fff;
@@ -47,10 +50,24 @@ html,body {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	background-color: pink;
+	background-color: #081633;
 	width: 35%;
 	height: 60%;
+	padding: 20px;
 	display: none;
+	color: #fff;
+	border: 1px solid #fff;
+	overflow: scroll;
+}
+.container {
+	padding: 20px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 105%
+}
+.title {
+	text-align: center;
+	font-size: 20px;
 }
 #back {
 	color: #fff;

@@ -3,7 +3,11 @@
 	// map1 = null;
 	// bmap = null;
 	// map2 = true;
-getCityDetail((data)=>{
+getCityDetail(drawCityDetail);
+
+
+function drawCityDetail(data) {
+    // myChart.clear();
 	option = {
     // backgroundColor: '#404a59',
     title: {
@@ -33,7 +37,7 @@ getCityDetail((data)=>{
                         "featureType": "land",
                         "elementType": "all",
                         "stylers": {
-                            "color": "#004981"
+                            "color": "#081734"
                         }
                     },
                     {
@@ -198,73 +202,26 @@ getCityDetail((data)=>{
     ]
 };
     myChart.setOption(option); 
-    myChart.on("click", function (param) { 
-       console.log(param);
+    myChart.on("click", function (param) {
+        for(let item of choseCity) {
+            if(item.name === param.name)
+                {
+                    //拼接信息
+                    var str = `<p class="title">${item.name}</p>
+                    <p><span>军民融合度分数：</span>${item.value[2]}</p>
+                    <p><span>所属产业：</span>${item.industry}</p>
+                    <p><span>涉及产业：</span><i>${item.businessscope}</i></p>
+                    <p><span>成立日期：</span>${item.estiblishtime}</p>
+                    <p><span>更新日期：</span>${item.updatetimes}</p>
+                    <p><span>截至日期：</span>${item.totime}</p>
+                    <p><span>坐标：</span>${item.district},${item.reglocation}</p>
+                    <p><span>法人代表：</span>${item.legalpersonname}</p>
+                    <p><span>公司高层：</span>${item.stafflist}</p>
+                    <p><span>邮箱：</span>${item.email}  <span>电话：</span>${item.phonenumber}</p>
+                    <p><span>经纬度坐标：</span>${item.value[0]},${item.value[1]}</p>`
+                    $("#Citydetail").html(str);
+                    return;
+                }
+        } 
    })
-});
-getCityInfo(() => {
-    var myChart = echarts.init(document.getElementById('establichTime'));
-    var base = +new Date(1968, 9, 3);
-    var oneDay = 24 * 3600 * 1000;
-    var date = [];//从小到大放入所有日期
-
-    var data = [];
-
-    console.log(cityInfo);
-    for(var key in cityInfo) {
-        for(var item_info of cityInfo[key]) {
-            date.push(item_info.estiblishtime, item_info.updatetimes)
-        }
-    }
-    //去重
-    date = Array.from(new Set(date))
-    //从小到大排序
-    date.sort();
-    option = {
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: date,
-            show: false
-        },
-        yAxis: {
-            type: 'value',
-            boundaryGap: [0, '100%'],
-            show: false
-        },
-        dataZoom: [{
-            type: 'inside',
-            start: 0,
-            end: 100
-        }, {
-            start: 0,
-            end: 100,
-            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-            handleSize: '80%',
-            textStyle: {
-                color: "#fff"
-            },
-            fillerColor: "#337AB7",
-            realtime: false
-        }],
-        series: [
-            {
-                // name:'模拟数据',
-                type:'line',
-                smooth:false,
-                symbol: 'none',
-                sampling: 'average',
-                itemStyle: {
-                    color: "#000C4D",
-                },
-                data: data
-            }
-        ]
-    };
-
-    myChart.setOption(option); 
-    myChart.on("datazoom", function (param) {
-        console.log(date[myChart.getModel().option.dataZoom[0].startValue]); //成立时间
-        console.log(date[myChart.getModel().option.dataZoom[0].endValue]);  //最后更新时间
-    })
-})
+}

@@ -15,6 +15,7 @@ var cityInfo = {
 	architecturea: [],
 	other: []
 };
+var choseCity = [];
 var t = [];
 function jisuan(callback){
 	d3.csv("./static/allProvinceData.csv",function(error,csvdata){
@@ -66,17 +67,23 @@ function getCityDetail(callback) {
 		if (error) {
 			console.log(error);
 		}
-		var tt = [];
 		for (var i = 0; i < csvdata.length; i++) {
-			tt.push({name:csvdata[i].name,value:[csvdata[i].lng,csvdata[i].lat,csvdata[i].score]})
+			t.push({name:csvdata[i].name,value:[csvdata[i].lng,csvdata[i].lat,csvdata[i].score]})
 		}
-		callback(tt);
+		callback(t);
 	})
 }
 function getCityInfo(callback) {
 	//获取城市的具体信息，按行业分类
 	d3.csv("./static/mianyang.csv",function(error,csvdata) {
 		csvdata.forEach((item, index) => {
+			//放一下value的值，方便后面绘制
+			for(var i=0;i<t.length;i++) {
+				if(item.name === t[i].name) {
+					item.value = t[i].value;
+					break;
+				}
+			}
 			//分区
 			cityInfoHandle.handleReglocation(item);
 			//分类别&&存放
@@ -87,6 +94,10 @@ function getCityInfo(callback) {
 			cityInfoHandle.handleTime(item, "totime");
 			cityInfoHandle.handleTime(item, "updatetimes");
 		})
+		//放一下初始的cityInfo
+		for(let key in cityInfo) {
+			choseCity = choseCity.concat(cityInfo[key]);
+		}
 		callback();
 	})
 }

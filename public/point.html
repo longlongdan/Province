@@ -21,42 +21,56 @@
     <div id="province"></div>
     <div id="cityDetailFliter">
         <span style="color: #fff;">选择行业&nbsp;</span>
-        <select class="selectpicker" multiple data-style="btn-primary" data-selected-text-format="count > 4">
-            <option value="1">制造业</option>
-            <option value="2">服务业</option>
-            <option value="3">研究所</option>
-            <option value="4">纺织业</option>
-            <option value="5">批发业</option>                            
-            <option value="5">制品业</option>                            
-            <option value="5">加工业</option>                            
-            <option value="5">安装业</option>                            
-            <option value="5">治理业</option>                            
-            <option value="5">建筑业</option> 
-            <option value="5">其他</option> 
+        <select class="selectpicker" id="industry" multiple data-style="btn-primary" data-selected-text-format="count > 4">
+            <option value="all">全部</option>            
+            <option value="manufacture">制造业</option>
+            <option value="service">服务业</option>
+            <option value="science">研究所</option>
+            <option value="spin">纺织业</option>
+            <option value="wholesale">批发业</option>                            
+            <option value="products">制品业</option>                            
+            <option value="machining">加工业</option>                            
+            <option value="install">安装业</option>                            
+            <option value="government">治理业</option>                            
+            <option value="architecturea">建筑业</option> 
+            <option value="other">其他</option> 
         </select>
         <div class="line"></div>
         <span style="color: #fff;">选择区域&nbsp;</span>
-        <select class="selectpicker" multiple data-style="btn-primary" data-selected-text-format="count > 4">
-            <option value="1">高新区</option>
-            <option value="4">游仙区</option>            
-            <option value="5">涪城区</option>                            
-            <option value="5">科创园区</option>                            
-            <option value="5">经开区</option>                            
-            <option value="5">安州区</option>                            
-            <option value="5">平武区</option>                            
-            <option value="5">农科区</option>                            
-            <option value="5">北川羌族自治县</option>                            
-            <option value="5">安县</option>                            
-            <option value="5">梓潼县</option>                            
-            <option value="5">三台县</option>
-            <option value="5">江油市</option>
+        <select class="selectpicker" id="reglocation" multiple data-style="btn-primary" data-selected-text-format="count > 4">
+            <option value="高新区">高新区</option>
+            <option value="游仙区">游仙区</option>            
+            <option value="涪城区">涪城区</option>                            
+            <option value="科创园区">科创园区</option>                            
+            <option value="经开区">经开区</option>                            
+            <option value="安州区">安州区</option>                            
+            <option value="平武区">平武区</option>                            
+            <option value="农科区">农科区</option>                            
+            <option value="北川羌族自治县">北川羌族自治县</option>                            
+            <option value="安县">安县</option>                            
+            <option value="梓潼县">梓潼县</option>                            
+            <option value="三台县">三台县</option>
+            <option value="江油市">江油市</option>
+            <option value="全部">全部</option>
         </select>
         <div class="line"></div>
         <span style="color: #fff;">选择成立时间&nbsp;</span>
         <div id="establichTime"></div>
     </div>
     <div id="wordCloud"></div>
-    <div id="Citydetail"></div>
+    <div id="Citydetail">
+        <p class="title">绵阳启明星磷化工有限公司</p>
+        <p><span>军民融合度分数：</span>92</p>
+        <p><span>所属产业：</span>化学原料和化学制品制造业</p>
+        <p><span>涉及产业：</span><i>"黄磷、磷酸、赤磷、三氯化磷、三氯硫磷、五硫化二磷、三聚磷酸钠、六偏磷酸钠、磷泥酸、磷铁、甲酸、甲酸钠、甲酸钾、磷酸钠盐制造、销售；化肥级磷酸一、二铵、磷酸二氢钾、磷酸脲制造、销售；食品添加剂磷酸(磷酸、三聚磷酸钠、磷酸一、二铵、磷酸二氢钾、六偏磷酸钠)制造、销售；日用杂品、化工产品(不含危险品)销售；机电修理；经营本企业自产产品及技术的出口业务和本企业所需的机械设备、零配件、原材料及技术的进口业务(国家限定公司经营或禁止进出口的商品及技术除外)"</i></p>
+        <p><span>成立日期：</span>"20020003"</p>
+        <p><span>更新日期：</span>"20020003"</p>
+        <p><span>截至日期：</span>"20020003"</p>
+        <p><span>坐标：</span>安县河清镇宝华村</p>
+        <p><span>法人代表：</span>"陈大强"</p>
+        <p><span>公司高层：</span>"王辉,李燕,陈大强,黎宁,彭永,杨汝燕,柳景森,熊道顺,"</p>
+        <p><span>经纬度坐标：</span>"104.33333333" "193.00099877"</p>
+    </div>
     <div id="back" class="glyphicon glyphicon-arrow-left"></div>
 </body>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
@@ -89,6 +103,8 @@
 <script type="text/javascript" src="/js/wordCloud.js"></script>
 <!-- 展示具体城市信息 -->
 <script type="text/javascript" src="/js/cityDetail.js"></script>
+<!-- 处理过滤面板的事件 -->
+<script type="text/javascript" src="/js/cityDetailFilter.js"></script>
 <!-- province块展示省级数据 -->
 <script type="text/javascript" src="/js/province.js"></script>
 <!-- map块展示中国数据 -->

@@ -154,6 +154,7 @@ function showChinaData(provinces = null) {
 //通过定时器完成双击和单机的判断
     var timer=null;
     bmap.addEventListener('click',function(e){
+      clearTimeout(timer);
       timer=setTimeout(()=>{//初始化一个延时
         changeInfo(e);
       },250)
@@ -172,20 +173,20 @@ function showChinaData(provinces = null) {
 //重新绘制province
         createProvince(e.point.lng, e.point.lat,addComp.province);
         showProvinceData();
-        //去掉最后一个省和区 更新词云
-        GetCloudData(addComp.province.replace(/省|自治区|市|维吾尔|壮族/g,""))
+        //更新词云
+        GetCloudData("成都")
         });
 
     }
     //单机只更改词云
     function changeInfo(e) {
-            var geoc = new BMap.Geocoder(); 
-            var point = new BMap.Point(e.point.lng, e.point.lat);
-            geoc.getLocation(point, function (rs) {
-                var addComp = rs.addressComponents;
-            //去掉最后一个省和区 更新词云
-                GetCloudData(addComp.province.replace(/省|自治区|市|维吾尔|壮族/g,""))
-            });
+        var geoc = new BMap.Geocoder(); 
+        var point = new BMap.Point(e.point.lng, e.point.lat);
+        geoc.getLocation(point, function (rs) {
+            var addComp = rs.addressComponents;
+        //去掉最后一个省和区 更新词云
+            GetCloudData(addComp.province.replace(/省|自治区|市|维吾尔|壮族/g,""))
+        });
     }
 
 }
