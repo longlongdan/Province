@@ -46,7 +46,7 @@ html,body {
 .line {
 	height: 5px;
 }
-#Citydetail {
+#Citydetail,#sort {
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -54,10 +54,12 @@ html,body {
 	width: 35%;
 	height: 60%;
 	padding: 20px;
-	display: none;
 	color: #fff;
 	border: 1px solid #fff;
 	overflow: scroll;
+}
+#Citydetail {
+	display: none;
 }
 .container {
 	padding: 20px;

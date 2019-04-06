@@ -11,16 +11,28 @@ function showProvinceData(citys = null) {
     //传入关键字相关城市
     if (citys) {
         citysData.map((item)=>{
-            // console.log(citys,item[0])
+            let canPush = true;
             if (citys.indexOf(item[0])!==-1) {
-                data1.push({
-                    geo: item[1],
-                    count: item[2],
-                })
+                for(let i=0;i<data1.length;i++) {
+                    if(data1[i].name === item[0]) {
+                        canPush = false;
+                        break;
+                    }
+                }
+                if(canPush) {
+                    data1.push({
+                        name: item[0],
+                        geo: item[1],
+                        count: item[2],
+                        index: item[2]/100
+                    })
+                }
             }
         })
-        // console.log(data1);
         layer1.setData(data1);
+        //更新一下sort排序图
+        console.log(data1);
+        createSort(data1, "province");
         return;
     }
     //已经获取了省份的城市信息

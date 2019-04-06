@@ -20,7 +20,12 @@ function GetCloudData(name="四川") {
         // 指定图表的配置项和数据
         option = {
     title:{
-        text:name
+        text:name,
+        textStyle: {
+            fontWeight: "normal",
+            color: "#fff", 
+            fontSize: 14
+          },
     },
     tooltip: {},
     series: [{

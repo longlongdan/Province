@@ -15,6 +15,8 @@ function showChinaData(provinces = null) {
     if (provinces) {
         var tempData = cityData.filter(item => provinces.indexOf(item.Provinces)!==-1)
         updateMap(tempData);
+        //更新一下排序的图
+        createSort(tempData);
     }
     else createMap();
     function createMap() {
@@ -162,6 +164,12 @@ function showChinaData(provinces = null) {
     bmap.addEventListener('dblclick',(e)=>{//双击事件会先触发两次单击事件，然后再执行双击事件，使用清除定时器来达到双击只执行双击事件的目的
       clearTimeout(timer);
       showInfo(e);
+      //记得修改为回掉函数，或者promise异步！！
+      setTimeout(()=>{
+        console.log(provinceData);
+        createSort(provinceData, 'province');
+      },100)
+     
     },false);
 //双击切换到省份单独显示
     function showInfo(e) {

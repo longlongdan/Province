@@ -5,7 +5,8 @@ $().ready(function(){
 		// 绘制主图的所有视图，异步
         createChina();
         showChinaData();
-	      GetCloudData("四川");
+        GetCloudData("四川");
+        createSort();
 	}
   // $("#map").hide();
   $("#back").click(function(e){
@@ -17,12 +18,14 @@ $().ready(function(){
     bmap = null;
     createProvince();
     showProvinceData();
+    GetCloudData("成都");
    }
       // 返回上一级地图
     else if (map1&&!bmap) {
         //返回首页
         createChina();
         showChinaData();
+        createSort();
         GetCloudData("四川");
     }
   })
