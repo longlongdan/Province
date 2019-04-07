@@ -166,7 +166,6 @@ function showChinaData(provinces = null) {
       showInfo(e);
       //记得修改为回掉函数，或者promise异步！！
       setTimeout(()=>{
-        console.log(provinceData);
         createSort(provinceData, 'province');
       },100)
      

@@ -15,6 +15,21 @@ var cityInfo = {
 	architecturea: [],
 	other: []
 };
+var LIANXI = {
+	manufacture: '制造业',
+	service: '服务业',
+	science: '研究所',
+	spin: '纺织业',
+	wholesale: '批发业',
+	products: '制品业',
+	machining: '加工业',
+	install: '安装业',
+	government: '治理业',
+	architecturea: '建筑业',
+	other: '其他',
+	all: ['制造业','服务业','研究所','纺织业','批发业','制品业','加工业','安装业','治理业','建筑业','其他']
+}
+let len = 0;
 var choseCity = [];
 var t = [];
 function jisuan(callback){
@@ -85,7 +100,7 @@ function getCityInfo(callback) {
 				}
 			}
 			//分区
-			cityInfoHandle.handleReglocation(item);
+			cityInfoHandle.handleReglocation(item,callback);
 			//分类别&&存放
 			cityInfoHandle.handleIndustry(item);
 			//对时间做处理
@@ -98,15 +113,15 @@ function getCityInfo(callback) {
 		for(let key in cityInfo) {
 			choseCity = choseCity.concat(cityInfo[key]);
 		}
-		callback();
+		// callback();
 	})
 }
 var cityInfoHandle = {
-	handleReglocation: function(item) {
+	handleReglocation: function(item,callback) {
 		//存一下在绵阳的哪个区
 		let reglocation = item.reglocation;
 		if(reglocation.indexOf("高新区") !== -1) {
-			item.district = "高新区"
+			item.district = "高新区";
 		}
 		else if(reglocation.indexOf("游仙") !== -1) {
 			item.district = "游仙区"
@@ -149,7 +164,22 @@ var cityInfoHandle = {
 			var geoc = new BMap.Geocoder(); 
 			var point = new BMap.Point(item.lng,item.lat);
 			geoc.getLocation(point, function (rs) {
+				//添加
 				item.district = rs.addressComponents.district;
+				//修改数据格式
+				len++;
+				if(len>=30){
+					for(var key in cityInfo){ //cityInfo = {mm:[],nn:[],gg:[]}
+					let child = {};
+					cityInfo[key].forEach((item)=>{
+						child[item.district] ? child[item.district].push(item) : child[item.district] = [item];
+					})
+					let length = cityInfo[key].length;
+					cityInfo[key] = child;
+					cityInfo[key].length = length;
+				}
+				callback();
+				}
 	        });
 		}
 	},

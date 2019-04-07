@@ -82,6 +82,6 @@ function createSort(data=cityData, sortType="china"){
     myChart.setOption(option); 
     myChart.on("click", function (param) { 
         //根据地址寻找点
-        GetCloudData(param.name);
+        GetCloudData(param.name.replace(/自治区|市|维吾尔|壮族|藏|羌族|羌州|彝|族|自治州/g,""));
      })
 }

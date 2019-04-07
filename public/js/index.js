@@ -13,6 +13,7 @@ $().ready(function(){
    $("#map").show();
    $("#wordCloud").show();
    $("#Citydetail").hide();
+   $("#sort").show();
    if (!map1&&!bmap) {
     map1 = true;
     bmap = null;

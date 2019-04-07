@@ -31,7 +31,6 @@ function showProvinceData(citys = null) {
         })
         layer1.setData(data1);
         //更新一下sort排序图
-        console.log(data1);
         createSort(data1, "province");
         return;
     }
@@ -142,15 +141,16 @@ function showProvinceData(citys = null) {
     function showInfo(e) {
         var geoc = new BMap.Geocoder(); 
         var point = new BMap.Point(e.point.lng, e.point.lat);
-        geoc.getLocation(point, function (rs) {
-            var addComp = rs.addressComponents.city;
-            //去掉最后一个省和区 更新词云
-            GetCloudData(addComp.replace(/自治区|市|维吾尔|壮族|藏|羌族|羌州|彝|族|自治州/g,""))
-            });
+    //     geoc.getLocation(point, function (rs) {
+    //         var addComp = rs.addressComponents.city;
+    //         //去掉最后一个省和区 更新词云
+    //         GetCloudData(addComp.replace(/自治区|市|维吾尔|壮族|藏|羌族|羌州|彝|族|自治州/g,""))
+    //         });
         //显示城市的具体信息
         $("#map").hide();
         $("#wordCloud").hide();
         $("#Citydetail").show();
+        $("#sort").hide();
         map1 = null;
     };
     function changeInfo(e) {

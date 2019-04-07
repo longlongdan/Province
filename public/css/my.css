@@ -26,7 +26,7 @@ html,body {
 	border: 1px solid #fff;
 	margin-left: -1px;
 }
-#wordCloud,#cityDetailFliter {
+#wordCloud,#Analysis {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -35,8 +35,8 @@ html,body {
 	height: 40%;
 	border: 1px solid #fff;
 }
-#cityDetailFliter {
-	padding: 20px;
+#Analysis {
+	height: 60%;
 	/* display: none; */
 }
 #establichTime {
@@ -57,6 +57,9 @@ html,body {
 	color: #fff;
 	border: 1px solid #fff;
 	overflow: scroll;
+}
+#Citydetail {
+	height: 40%;
 }
 #Citydetail {
 	display: none;
