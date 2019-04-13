@@ -16,18 +16,18 @@ var cityInfo = {
 	other: []
 };
 var LIANXI = {
-	manufacture: '制造业',
-	service: '服务业',
-	science: '研究所',
-	spin: '纺织业',
-	wholesale: '批发业',
-	products: '制品业',
-	machining: '加工业',
-	install: '安装业',
-	government: '治理业',
-	architecturea: '建筑业',
-	other: '其他',
-	all: ['制造业','服务业','研究所','纺织业','批发业','制品业','加工业','安装业','治理业','建筑业','其他']
+	'制造业': 'manufacture',
+	'服务业': 'service',
+	'研究所': 'science',
+	'纺织业': 'spin',
+	'批发业': 'wholesale',
+	'制品业': 'products',
+	'加工业': 'machining',
+	'安装业': 'install',
+	'治理业': 'government',
+	'建筑业': 'architecturea',
+	'其他': 'other'
+	// all: ['制造业','服务业','研究所','纺织业','批发业','制品业','加工业','安装业','治理业','建筑业','其他']
 }
 let len = 0;
 var choseCity = [];

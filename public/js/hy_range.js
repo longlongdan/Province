@@ -5,6 +5,9 @@ $(()=>{
 function showHyRange(data = cityInfo) {
     var myChart = echarts.init(document.getElementById('Analysis'));	
     myChart.title = '嵌套环形图';
+    //定义两个变量存储你所选择的行业和区域，默认为全部
+    var industry = '';
+    var legion = '';
     let data1 = [];
     let data0 = [
         {value:data['manufacture'].length, name:'制造业', selected:true},
@@ -26,7 +29,6 @@ function showHyRange(data = cityInfo) {
             }
         }
     }
-    console.log(data1);
     option = {
         tooltip: {
             trigger: 'item',
@@ -40,6 +42,9 @@ function showHyRange(data = cityInfo) {
             right: 10,
             top: 20,
             bottom: 20,
+            textStyle: {
+                color: '#58AFED'
+            }
         },
         series: [
             {
@@ -69,8 +74,7 @@ function showHyRange(data = cityInfo) {
         ]
     };
     myChart.setOption(option); 
-    myChart.on("legendselectchanged", function (param) { 
-        console.log(param);
+    myChart.on("legendselectchanged", function (param) {
         let temp = JSON.parse(JSON.stringify(data));
         let tempData0 = [...data0];
         for(var i in param.selected) {
@@ -104,8 +108,6 @@ function showHyRange(data = cityInfo) {
                 }
             }
         }
-        console.log(tempData0);
-        console.log(data1);
         option = {
             tooltip: {
                 trigger: 'item',
@@ -149,4 +151,42 @@ function showHyRange(data = cityInfo) {
         }
         myChart.setOption(option);
      })
+    myChart.on("click", function (param) { 
+        //判断哪些省份含这个关键字
+      let name = param.data.name;
+      if(LIANXI[name]) {
+          //点击的是行业
+          industry = industry === name ? '' : name;
+          legion = '';
+      }
+      else {
+        legion = legion === name ? '' : name;
+      }
+      //通过行业和区域筛选data数据
+      let tempData = null;
+      let Result = [];
+      if(industry) tempData = {em: data[LIANXI[industry]]}; //取到的tempData都是对象，采用遍历的方法
+      else tempData = data;
+      if(legion) {
+          //存在对区域的筛选
+          for(var key in tempData) {
+              tempData[key][legion].forEach((q) => {
+                Result.push({name: q.name, value: q.value});
+            })
+          }
+      }
+      else {
+          //不存在，tempData里的所有值
+          for(var key in tempData) {
+            for(var key2 in tempData[key]) {
+                if(key2 === 'length') break;
+                tempData[key][key2].forEach((q) => {
+                    Result.push({name: q.name, value: q.value});
+                })
+            }
+        }
+      }
+      drawCityDetail(Result);
+   })
+
 }
