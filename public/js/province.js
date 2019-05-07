@@ -151,6 +151,8 @@ function showProvinceData(citys = null) {
         $("#wordCloud").hide();
         $("#Citydetail").show();
         $("#sort").hide();
+        $("#companyCompare").show();
+        drawCompanyCompare();
         map1 = null;
     };
     function changeInfo(e) {

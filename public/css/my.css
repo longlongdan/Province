@@ -58,6 +58,16 @@ html,body {
 	border: 1px solid #fff;
 	overflow: scroll;
 }
+#companyCompare {
+	position: absolute;
+	bottom:0;
+	left: 0;
+	background-color: #081633;
+	width: 65%;
+	height: 40%;
+	border: 1px solid #fff;
+	display: none;
+}
 #Citydetail {
 	height: 40%;
 }

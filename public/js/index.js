@@ -7,6 +7,8 @@ $().ready(function(){
         showChinaData();
         GetCloudData("四川");
         createSort();
+        //测试代码
+        // drawCompanyCompare();
 	}
   // $("#map").hide();
   $("#back").click(function(e){
@@ -14,6 +16,7 @@ $().ready(function(){
    $("#wordCloud").show();
    $("#Citydetail").hide();
    $("#sort").show();
+   $("#companyCompare").hide();
    if (!map1&&!bmap) {
     map1 = true;
     bmap = null;

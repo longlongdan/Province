@@ -1,7 +1,10 @@
 var cityData = []
 var provinceData = []
 var wordsDisctData = []
+//所有公司的详情
 var cityDetailData = []
+//放入你要对比的公司详情 id: {详情}
+var companies = {};
 var cityInfo = {
 	manufacture: [],
 	service: [],
@@ -108,6 +111,7 @@ function getCityInfo(callback) {
 			cityInfoHandle.handleTime(item, "estiblishtime");
 			cityInfoHandle.handleTime(item, "totime");
 			cityInfoHandle.handleTime(item, "updatetimes");
+			cityDetailData.push(item);
 		})
 		//放一下初始的cityInfo
 		for(let key in cityInfo) {
@@ -187,36 +191,47 @@ var cityInfoHandle = {
 		//分一下行业类别
 		let industry = item.industry;
 		if(industry.indexOf("制造业") !== -1) {
+			item.industry_c = '制造业';
 			cityInfo.manufacture.push(item);
 		}
 		else if(industry.indexOf("服务") !== -1) {
+			item.industry_c = '服务业';
 			cityInfo.service.push(item);
 		}
 		else if(industry.indexOf("研究") !== -1) {
+			item.industry_c = '研究所';
 			cityInfo.science.push(item);
 		}
 		else if(industry.indexOf("纺织业") !== -1) {
+			item.industry_c = '纺织业';
 			cityInfo.spin.push(item);
 		}
 		else if(industry.indexOf("批发业") !== -1) {
+			item.industry_c = '批发业';
 			cityInfo.wholesale.push(item);
 		}
 		else if(industry.indexOf("制品业") !== -1) {
+			item.industry_c = '制品业';
 			cityInfo.products.push(item);
 		}
 		else if(industry.indexOf("加工业") !== -1) {
+			item.industry_c = '加工业';
 			cityInfo.machining.push(item);
 		}
 		else if(industry.indexOf("安装") !== -1) {
+			item.industry_c = '安装业';
 			cityInfo.install.push(item);
 		}
 		else if(industry.indexOf("治理") !== -1) {
+			item.industry_c = '治理业';
 			cityInfo.government.push(item);
 		}
 		else if(industry.indexOf("建筑") !== -1) {
+			item.industry_c = '建筑业';
 			cityInfo.architecturea.push(item);
 		}
 		else {
+			item.industry_c = '其他';
 			cityInfo.other.push(item);
 		}
 	},

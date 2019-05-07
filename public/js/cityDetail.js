@@ -21,7 +21,7 @@ function drawCityDetail(data) {
         trigger: 'item'
     },
     bmap: {
-        center: [104.73,31.47],
+        center: [104.73,31.20],
         zoom: 10,
         roam: true,
         mapStyle: {
@@ -206,6 +206,12 @@ function drawCityDetail(data) {
         for(let item of choseCity) {
             if(item.name === param.name)
                 {
+                    //添加到公司对比中查找列表，添加列表
+                    if(!companies[item.id]) {
+                        //公司对比列表里面没有
+                        companies[item.id] = item;
+                        addCompanyCompare(item);
+                    }
                     //拼接信息
                     var str = `<p class="title">${item.name}</p>
                     <p><span>军民融合度分数：</span>${item.value[2]}</p>
