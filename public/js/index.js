@@ -16,7 +16,7 @@ $().ready(function(){
    $("#wordCloud").show();
    $("#Citydetail").hide();
    $("#sort").show();
-   $("#companyCompare").hide();
+   $("#companyCompareComtainer").hide();
    if (!map1&&!bmap) {
     map1 = true;
     bmap = null;
@@ -32,5 +32,17 @@ $().ready(function(){
         createSort();
         GetCloudData("四川");
     }
+  })
+
+  //清空数据
+  $("#clear").click(function(e){
+    // var temp = {};
+    // for(var key in companies) {
+    //   temp[key] =  companies[key];
+    //   break;
+    // }
+    // companies = temp;
+    companies = {};
+    drawCompanyCompare();
   })
 });

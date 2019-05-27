@@ -4,7 +4,7 @@ var Companiesobj = {}
 function drawCompanyCompare() {
     var myChart_Compare = echarts.init(document.getElementById('companyCompare'));
     //每个数组代表行业 全局的compaines存的是公司信息{id1: [公司信息]，id2：[公司信息]}，取出industy_c的值，对应放入数组
-    var Companiesobj = {};
+    Companiesobj = {};
     
     //计算一下分数，成立日期，更新日期，注册日期，截至日期的max，min
     //计算有哪些区域
@@ -25,14 +25,15 @@ function drawCompanyCompare() {
             Companiesobj[industry_c].push([value[2],estiblishtime, updatetimes, totime, approvedtime, district, industry_c]);
         }
         _value.push(value[2]);
+        // _estiblishtime.push(updatetimes);
         _estiblishtime.push(estiblishtime);
+        // console.log(estiblishtime);
         _updatetimes.push(updatetimes);
         _approvedtime.push(approvedtime);
         _totime.push(totime);
         if(!_district.includes(district)) _district.push(district);
         if(!_industry_c.includes(industry_c)) _industry_c.push(industry_c);
     }
-    console.log(Companiesobj);
     var schema = [
         {name: 'score', index: 0, text: '分数'},
         {name: 'estiblishtime', index: 1, text: '成立日期'},
@@ -97,7 +98,7 @@ function drawCompanyCompare() {
         },
         parallelAxis: [
             {dim: 0, name: schema[0].text, inverse: true, max: Math.max(..._value), min: Math.min(..._value), nameLocation: 'start'},
-            {dim: 1, name: schema[1].text, max: Math.max(..._estiblishtime), min: Math.min(_estiblishtime)},
+            {dim: 1, name: schema[1].text, max: Math.max(..._estiblishtime), min: Math.min(..._estiblishtime)},
             {dim: 2, name: schema[2].text, max: Math.max(..._updatetimes), min: Math.min(..._updatetimes)},
             {dim: 3, name: schema[3].text, max: Math.max(..._totime), min: Math.min(..._totime)},
             {dim: 4, name: schema[4].text, max: Math.max(..._approvedtime), min: Math.min(..._approvedtime)},
@@ -149,7 +150,7 @@ function drawCompanyCompare() {
         },
         series: seriesData
     };
-    myChart_Compare.setOption(option); 
+    myChart_Compare.setOption(option,true); 
     myChart_Compare.on('click', (param) => {
         console.log(param);
     })
@@ -159,13 +160,11 @@ function drawCompanyCompare() {
     })
 }
 function addCompanyCompare(data) {
-    console.log(data);
     //往Companiesobj里面加入data
     drawCompanyCompare();
     console.log(Companiesobj);
 }
 function removeCompanyCompare(data) {
-    console.log(data);
     //往compainesObj里面删除data
     drawCompanyCompare();
     consoloe.log(Companiesobj);

@@ -10,7 +10,7 @@ function showHyRange(data = cityInfo) {
     var legion = '';
     let data1 = [];
     let data0 = [
-        {value:data['manufacture'].length, name:'制造业', selected:true},
+        {value:data['manufacture'].length, name:'制造业'},
         {value:data['service'].length, name:'服务业'},
         {value:data['science'].length, name:'研究所'},
         {value:data['spin'].length, name:'纺织业'},

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>点数据展示</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">  
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"> 
+    <script>window.pageStartTime = Date.now()</script> 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
@@ -22,7 +23,10 @@
     <div id="Analysis"></div>
     <div id="wordCloud"></div>
     <div id="sort"></div>
-    <div id="companyCompare"></div>
+    <div id="companyCompareComtainer">
+        <div id="companyCompare"></div>
+        <div id="clear" class="glyphicon glyphicon-refresh"></div>
+    </div>
     <div id="Citydetail">
         <p class="title">绵阳启明星磷化工有限公司</p>
         <p><span>军民融合度分数：</span>92</p>
@@ -84,4 +88,6 @@
 <script type="text/javascript" src='/js/map.js'></script>
 <!-- index.js -->
 <script type="text/javascript" src = '/js/index.js'></script>
+<script>window.firstScreen = Date.now();
+console.log(window.firstScreen-window.pageStartTime)</script>
 </html>

@@ -151,9 +151,9 @@ function showProvinceData(citys = null) {
         $("#wordCloud").hide();
         $("#Citydetail").show();
         $("#sort").hide();
-        $("#companyCompare").show();
-        drawCompanyCompare();
+        $("#companyCompareComtainer").show();
         map1 = null;
+        drawCompanyCompare();
     };
     function changeInfo(e) {
         var geoc = new BMap.Geocoder(); 
